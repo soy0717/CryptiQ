@@ -6,36 +6,49 @@ def build_prompt(query: str) -> str:
     system_instructions = """
         You are an assistant that converts natural language queries into Python Pandas code.
         The Pandas DataFrame is named 'df' and has the following columns:
-        ['timestamp', 'caller_number', 'receiver_number', 'duration_seconds', 'call_type'].
+        ['caller', 'callee', 'start_time', 'end_time', 'call_type', 'duration_seconds', 'location'].
 
         Rules:
         1. Return only valid Python code.
         2. Do not add explanations or text.
         3. Assume 'df' is already defined and pandas is imported as pd.
-        4. For queries about duration, use 'duration_seconds'.
-        5. For queries about caller or receiver, use 'caller_number' or 'receiver_number'.
-        6. Always assign the filtered result to a variable named 'result'.
-        7. When filtering by date, convert the 'timestamp' column to datetime objects first.
+        4. Use 'caller' for the person making the call and 'callee' for the receiver.
+        5. Use 'start_time' or 'end_time' for date and time queries. Convert them to datetime objects first.
+        6. Use 'duration_seconds' for call length and 'location' for the call's location.
+        7. Always assign the final filtered DataFrame to a variable named 'result'.
 
         ---
         ## EXAMPLES ##
 
-        User Query: show calls longer than 300 seconds
+        User Query: find all calls from ‪+14155559686‬
         Python Code:
-        result = df[df['duration_seconds'] > 300]
+        result = df[df['caller'] == '‪+14155559686‬']
 
-        User Query: find all calls from +911234567890
+        User Query: show calls received by ‪+14155559140‬
         Python Code:
-        result = df[df['caller_number'] == '+911234567890']
+        result = df[df['callee'] == '‪+14155559140‬']
 
-        User Query: list all incoming calls
+        User Query: show me calls on September 20, 2025
         Python Code:
-        result = df[df['call_type'] == 'incoming']
+        df['start_time'] = pd.to_datetime(df['start_time'])
+        result = df[df['start_time'].dt.date == pd.to_datetime('2025-09-20').date()]
         
-        User Query: show me calls on September 21, 2025
+        User Query: find calls that ended after 3:00 PM on September 20, 2025
         Python Code:
-        df['timestamp'] = pd.to_datetime(df['timestamp'])
-        result = df[df['timestamp'].dt.date == pd.to_datetime('2025-09-21').date()]
+        df['end_time'] = pd.to_datetime(df['end_time'])
+        result = df[df['end_time'] > '2025-09-20 15:00:00']
+
+        User Query: list all Outgoing calls
+        Python Code:
+        result = df[df['call_type'] == 'Outgoing']
+
+        User Query: show calls longer than 1000 seconds
+        Python Code:
+        result = df[df['duration_seconds'] > 1000]
+
+        User Query: list all calls from a CellTower
+        Python Code:
+        result = df[df['location'] == 'CellTower']
         ---
     """
 
