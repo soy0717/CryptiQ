@@ -6,10 +6,13 @@ import pandas as pd
 # Column mapping: canonical name -> actual DataFrame column
 COLUMN_MAP = {
     "duration": "duration_seconds",
-    "caller": "caller_number",
-    "receiver": "receiver_number",
+    "caller": "caller",
+    "receiver": "callee",
     "type": "call_type",
-    "timestamp": "timestamp"
+    "timestamp": "start_time",
+    "location": "location",
+    "start": "start_time",
+    "end": "end_time"
 }
 
 def handle_query(df, query):
