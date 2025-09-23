@@ -14,34 +14,37 @@ import {
 
 const ResultsDisplay = ({ queryResult, isLoading }) => {
   const formatDuration = (seconds) => {
-    if (seconds === 0) return 'N/A';
+    if (seconds === null || seconds === undefined || seconds === 0) return 'N/A';
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
+  // Updated to use start_time
   const formatTimestamp = (timestamp) => {
+    if (!timestamp) return 'N/A';
     return new Date(timestamp).toLocaleString();
   };
 
   const getCallIcon = (callType) => {
     switch (callType) {
       case 'Voice Call':
-        return <Phone size={16} className="text-[#3182CE]" />;
+        return <Phone size={18} className="text-[#3182CE]" />;
       case 'SMS':
-        return <MessageSquare size={16} className="text-[#38A169]" />;
+        return <MessageSquare size={18} className="text-[#38A169]" />;
       case 'Video Call':
-        return <Video size={16} className="text-[#805AD5]" />;
+        return <Video size={18} className="text-[#805AD5]" />;
       default:
-        return <Phone size={16} className="text-[#3182CE]" />;
+        return <Phone size={18} className="text-[#3182CE]" />;
     }
   };
 
   const getDirectionIcon = (direction) => {
     return direction === 'Outgoing' 
-      ? <ArrowUpRight size={14} className="text-[#F56565]" />
-      : <ArrowDownLeft size={14} className="text-[#38A169]" />;
+      ? <ArrowUpRight size={16} className="text-[#F56565]" />
+      : <ArrowDownLeft size={16} className="text-[#38A169]" />;
   };
+
   if (isLoading) {
     return (
       <div className="bg-[#1A202C] border border-[#2D3748] rounded-lg p-8">
@@ -115,59 +118,43 @@ const ResultsDisplay = ({ queryResult, isLoading }) => {
       {(queryResult.callLogs || []).length > 0 && (
         <div className="overflow-x-auto">
           <table className="w-full">
+            {/* UPDATED: Table headers for more clarity */}
             <thead className="bg-[#2D3748]">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Timestamp</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Communication</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Duration</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Location</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Timestamp</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Type</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Caller</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Callee</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Duration</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Location</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#2D3748]">
-              {/* FIX: Add 'index' to map for the key prop */}
+              {/* UPDATED: Table rows to match new columns */}
               {(queryResult.callLogs || []).map((log, index) => (
-                // FIX: Use 'index' as the key instead of log.id
                 <tr key={index} className="hover:bg-[#2D3748] transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-4 py-4 whitespace-nowrap text-sm text-[#E2E8F0]">
+                    {formatTimestamp(log.start_time)}
+                  </td>
+                  <td className="px-4 py-4">
                     <div className="flex items-center gap-2">
-                      <Clock size={14} className="text-[#718096]" />
-                      <span className="text-sm text-[#E2E8F0]">{formatTimestamp(log.timestamp)}</span>
+                      {getCallIcon(log.call_type)}
+                      <span className="text-sm text-[#E2E8F0]">{log.call_type}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      {getCallIcon(log.callType)}
-                      <div>
-                        {log.callType === 'SMS' ? (
-                          <div className="text-sm text-[#E2E8F0]">
-                            <div className="flex items-center gap-1">
-                              {getDirectionIcon(log.direction)}
-                              <span className="font-medium">From: {log.fromNumber}</span>
-                            </div>
-                            <div className="text-[#A0AEC0] text-xs">To: {log.toNumber}</div>
-                          </div>
-                        ) : (
-                          <div className="text-sm text-[#E2E8F0]">
-                            <div className="flex items-center gap-1">
-                              {getDirectionIcon(log.direction)}
-                              <span className="font-medium">
-                                {log.direction === 'Outgoing' ? 'To:' : 'From:'} 
-                                {log.direction === 'Outgoing' ? log.toNumber : log.fromNumber}
-                              </span>
-                            </div>
-                            <div className="text-[#A0AEC0] text-xs">{log.callType}</div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                  <td className="px-4 py-4 text-sm text-[#E2E8F0] font-mono">
+                    {log.caller || 'N/A'}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="text-sm text-[#E2E8F0] font-mono">{formatDuration(log.duration_seconds)}</span>
+                  <td className="px-4 py-4 text-sm text-[#E2E8F0] font-mono">
+                    {log.callee || 'N/A'}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-4 py-4 whitespace-nowrap text-sm text-[#E2E8F0] font-mono">
+                    {formatDuration(log.duration_seconds)}
+                  </td>
+                  <td className="px-4 py-4 text-sm text-[#A0AEC0]">
                     <div className="flex items-start gap-2">
                       <MapPin size={14} className="text-[#718096] mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-[#A0AEC0]">{log.location}</span>
+                      <span>{log.location}</span>
                     </div>
                   </td>
                 </tr>
