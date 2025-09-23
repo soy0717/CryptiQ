@@ -20,13 +20,13 @@ def build_prompt(query: str) -> str:
         ---
         ## EXAMPLES ##
 
-        User Query: find all calls from ‪+14155559686‬
+        User Query: find all calls from +14155559686
         Python Code:
-        result = df[df['caller'] == '‪+14155559686‬']
+        result = df[df['caller'] == '+14155559686']
 
-        User Query: show calls received by ‪+14155559140‬
+        User Query: show calls received by +14155559140
         Python Code:
-        result = df[df['callee'] == '‪+14155559140‬']
+        result = df[df['callee'] == '+14155559140']
 
         User Query: show me calls on September 20, 2025
         Python Code:
