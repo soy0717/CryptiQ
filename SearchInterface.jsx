@@ -3,12 +3,6 @@ import { Search, Clock, Filter } from 'lucide-react';
 
 const SearchInterface = ({ onSearch, isLoading }) => {
   const [query, setQuery] = useState('');
-  const [recentQueries] = useState([
-    'Show me all calls on January 15th between 2PM and 6PM',
-    'Find suspicious call patterns around downtown area',
-    'What calls were made to +1-555-0456 this week?'
-  ]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (query.trim()) {
@@ -26,10 +20,10 @@ const SearchInterface = ({ onSearch, isLoading }) => {
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-[#F7FAFC] mb-2 flex items-center justify-center gap-2">
           <Search className="text-[#3182CE]" size={28} />
-          Ask Your Evidence Database
+          Your digital case assistant
         </h2>
         <p className="text-[#A0AEC0] text-lg">
-          Type your question in plain English and get instant insights from call log data
+          Search the evidence: Calls, chats, locations, and more
         </p>
       </div>
 
@@ -57,24 +51,6 @@ const SearchInterface = ({ onSearch, isLoading }) => {
           </button>
         </div>
       </form>
-
-      <div className="mb-6">
-        <p className="text-[#A0AEC0] text-sm mb-3">Recent Queries:</p>
-        <div className="flex flex-wrap gap-2">
-          {recentQueries.map((recentQuery, index) => (
-            <button
-              key={index}
-              onClick={() => handleQuickQuery(recentQuery)}
-              className="text-sm bg-[#2D3748] hover:bg-[#4A5568] border border-[#4A5568]
-                       px-3 py-1 rounded-full transition-colors duration-200"
-              disabled={isLoading}
-            >
-              {recentQuery}
-            </button>
-          ))}
-        </div>
-      </div>
-
     </div>
   );
 };
