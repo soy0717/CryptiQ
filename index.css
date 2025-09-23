@@ -1,0 +1,634 @@
+/* index.css */
+
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0D1117;
+  color: #F0F6FC;
+  line-height: 1.6;
+}
+
+.app {
+  min-height: 100vh;
+  background: #0D1117;
+}
+
+/* Main Container - Better spacing */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Increased gap between sections */
+}
+
+/* Top Section (File Upload + Report Download) - Better spacing */
+.top-section {
+  display: flex;
+  gap: 3rem; /* Increased gap between upload and download */
+  margin-bottom: 2rem; /* Added margin below top section */
+}
+
+/* Header - Better spacing */
+header {
+  background: #161B22;
+  border-bottom: 1px solid #21262D;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-text h1 {
+  color: #F0F6FC;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header-text p {
+  color: #8B949E;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* File Upload Styles - Better spacing */
+.file-upload-container {
+  background: #1A202C;
+  border: 1px solid #2D3748;
+  border-radius: 16px;
+  padding: 2.5rem;
+  flex: 1;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.file-upload-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #F7FAFC;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.file-upload-icon {
+  width: 24px;
+  height: 24px;
+  color: #3182CE;
+}
+
+.file-upload-area {
+  border: 2px dashed #4A5568;
+  border-radius: 12px;
+  padding: 3.5rem 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.file-upload-area:hover,
+.file-upload-area.active {
+  border-color: #3182CE;
+  background: rgba(49, 130, 206, 0.05);
+}
+
+.file-upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.file-upload-large-icon {
+  width: 56px;
+  height: 56px;
+  color: #718096;
+}
+
+.file-upload-text {
+  color: #A0AEC0;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.file-upload-button {
+  background: #3182CE !important;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-upload-button:hover {
+  background: #2C5282 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+}
+
+.file-upload-subtext {
+  color: #718096;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.file-upload-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* File Upload Success - Better spacing */
+.file-upload-success {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background: rgba(56, 161, 105, 0.1);
+  border: 1px solid #38A169;
+  border-radius: 10px;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-icon {
+  width: 28px;
+  height: 28px;
+  color: #38A169;
+}
+
+.file-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.file-name {
+  color: #F7FAFC;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.file-size {
+  color: #A0AEC0;
+  font-size: 0.875rem;
+}
+
+.file-remove-button {
+  background: transparent !important;
+  color: #F56565;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.file-remove-button:hover {
+  background: rgba(245, 101, 101, 0.1) !important;
+}
+
+.remove-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Report Download Styles - Better spacing */
+.report-download-container {
+  background: #1A202C;
+  border: 1px solid #2D3748;
+  border-radius: 16px;
+  padding: 2.5rem;
+  flex: 1;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.report-download-button {
+  background: #38A169 !important;
+  color: white;
+  border: none;
+  padding: 1.25rem 2.5rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 280px;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(56, 161, 105, 0.2);
+}
+
+.report-download-button:hover:not(:disabled) {
+  background: #2F855A !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(56, 161, 105, 0.4);
+}
+
+.report-download-button:disabled {
+  background: #4A5568 !important;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.download-icon,
+.report-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.report-download-help {
+  color: #718096;
+  font-size: 0.95rem;
+  text-align: center;
+  margin: 0;
+}
+
+/* Search Interface - Better spacing and CENTERED HEADING */
+.search-interface {
+  background: #1A202C;
+  border: 1px solid #2D3748;
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  margin: 1rem 0; /* Added margin top and bottom */
+}
+
+/* CENTERED SEARCH TITLE */
+.search-interface h2 {
+  text-align: center !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #F7FAFC;
+  margin-bottom: 1rem;
+}
+
+.search-interface p {
+  text-align: center !important;
+  color: #A0AEC0;
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Results Display - Better spacing */
+.results-display {
+  background: #1A202C;
+  border: 1px solid #2D3748;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  margin-top: 1rem;
+}
+
+/* Form spacing */
+.search-interface form {
+  margin-bottom: 2.5rem;
+}
+
+.search-interface .relative {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+/* Input styling - better spacing */
+input[type="text"] {
+  background: #2D3748;
+  border: 1px solid #4A5568;
+  padding: 1rem 4rem 1rem 3rem;
+  border-radius: 12px;
+  color: #E2E8F0;
+  width: 100%;
+  font-size: 1.1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #3182CE;
+  box-shadow: 0 0 0 4px rgba(49, 130, 206, 0.1);
+}
+
+input[type="text"]::placeholder {
+  color: #718096;
+}
+
+/* Button improvements */
+button {
+  background: #3182CE;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #2C5282;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  background: #4A5568;
+  cursor: not-allowed;
+}
+
+/* Recent queries section - better spacing */
+.search-interface > div:last-child {
+  margin-bottom: 2rem;
+}
+
+.search-interface > div:last-child p {
+  text-align: left !important;
+  margin-bottom: 1rem;
+  color: #A0AEC0;
+  font-size: 0.95rem;
+}
+
+/* Query tags - better spacing */
+button.text-sm {
+  background: #2D3748;
+  border: 1px solid #4A5568;
+  color: #E2E8F0;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  margin: 0.25rem;
+  border-radius: 20px;
+}
+
+button.text-sm:hover:not(:disabled) {
+  background: #4A5568;
+}
+
+/* Bottom features section - centered */
+.search-interface > div:last-of-type {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  font-size: 0.95rem;
+  color: #718096;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+/* Results table improvements */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: #1A202C;
+}
+
+thead {
+  background: #2D3748;
+}
+
+th, td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid #2D3748;
+}
+
+th {
+  color: #A0AEC0;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+td {
+  color: #E2E8F0;
+}
+
+tbody tr:hover {
+  background: #2D3748;
+}
+
+/* Insight cards - better spacing */
+.insight-box {
+  background: #1A365D;
+  border: 1px solid #2D3748;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Utility classes */
+.text-green { color: #38A169; }
+.text-yellow { color: #D69E2E; }
+.text-red { color: #F56565; }
+
+/* Loading animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .top-section {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .main-container {
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+  
+  .file-upload-container,
+  .report-download-container {
+    padding: 2rem;
+  }
+  
+  .search-interface {
+    padding: 2rem;
+  }
+  
+  header {
+    padding: 1.5rem;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .header-text h1 {
+    font-size: 1.6rem;
+  }
+  
+  .search-interface h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .file-upload-area {
+    padding: 2.5rem 1rem;
+  }
+  
+  .report-download-button {
+    min-width: auto;
+    width: 100%;
+    padding: 1rem 2rem;
+  }
+  
+  table {
+    font-size: 0.875rem;
+  }
+  
+  th, td {
+    padding: 0.75rem;
+  }
+  
+  .main-container {
+    padding: 1rem;
+  }
+  
+  .search-interface {
+    padding: 1.5rem;
+  }
+}
+
+/* ADD THESE STYLES TO THE END OF YOUR index.css FILE */
+
+/* PDF Report Styles */
+.printable-report {
+  width: 800px; /* A fixed width for consistent PDF layout */
+  padding: 40px;
+  background: white;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.report-header {
+  text-align: center;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.report-header h1 {
+  font-size: 24px;
+  margin: 0;
+  color: #333;
+}
+
+.report-header p {
+  font-size: 12px;
+  color: #555;
+  margin: 4px 0 0;
+}
+
+.report-section {
+  margin-bottom: 30px;
+}
+
+.report-section h2 {
+  font-size: 16px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.report-section .query-text {
+  font-style: italic;
+  color: #444;
+  background: #f9f9f9;
+  padding: 10px;
+  border-left: 3px solid #ccc;
+}
+
+.report-section ul {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.report-section li {
+  margin-bottom: 8px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.report-table th, 
+.report-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.report-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.report-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.report-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+  font-size: 10px;
+  color: #777;
+}
