@@ -42,19 +42,6 @@ const ResultsDisplay = ({ queryResult, isLoading }) => {
       ? <ArrowUpRight size={14} className="text-[#F56565]" />
       : <ArrowDownLeft size={14} className="text-[#38A169]" />;
   };
-
-  const getRelevanceColor = (score) => {
-    if (score >= 90) return 'text-[#38A169]';
-    if (score >= 70) return 'text-[#D69E2E]';
-    return 'text-[#F56565]';
-  };
-
-  const getRelevanceIcon = (score) => {
-    if (score >= 90) return <CheckCircle size={16} className="text-[#38A169]" />;
-    if (score >= 70) return <AlertCircle size={16} className="text-[#D69E2E]" />;
-    return <AlertCircle size={16} className="text-[#F56565]" />;
-  };
-
   if (isLoading) {
     return (
       <div className="bg-[#1A202C] border border-[#2D3748] rounded-lg p-8">
@@ -87,8 +74,7 @@ const ResultsDisplay = ({ queryResult, isLoading }) => {
         <div className="flex items-center space-x-6 text-sm text-[#A0AEC0]">
           <span className="flex items-center gap-1">
             <CheckCircle size={16} className="text-[#38A169]" />
-            &nbsp;{queryResult.totalResults} results found
-            <br></br>
+            &nbsp;{queryResult.totalResults} results found&nbsp;
           </span>
           <span className="flex items-center gap-1">
             <Clock size={16} className="text-[#3182CE]" />
@@ -135,7 +121,6 @@ const ResultsDisplay = ({ queryResult, isLoading }) => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Communication</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Duration</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Location</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-[#A0AEC0] uppercase tracking-wider">Relevance</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#2D3748]">
@@ -183,12 +168,6 @@ const ResultsDisplay = ({ queryResult, isLoading }) => {
                     <div className="flex items-start gap-2">
                       <MapPin size={14} className="text-[#718096] mt-0.5 flex-shrink-0" />
                       <span className="text-sm text-[#A0AEC0]">{log.location}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center gap-2">
-                      {getRelevanceIcon(log.relevanceScore)}
-                      <span className={`text-sm font-medium ${getRelevanceColor(log.relevanceScore)}`}>{log.relevanceScore}%</span>
                     </div>
                   </td>
                 </tr>
